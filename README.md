@@ -17,6 +17,31 @@ Este microservicio gestiona el registro y control de ventas realizadas en EcoMar
 
 ---
 
+## Configuración del entorno
+
+### Base de datos
+
+- Motor: MySQL (MariaDB compatible)
+- Nombre: `ventas_db`
+- Usuario: `root`
+- Contraseña: *(vacía por defecto en XAMPP)*
+
+### Archivo `application.properties`
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/ventas_db?useSSL=false&serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=
+
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+server.port=8084
+```
+
+---
+
 ## Funcionalidades
 
 - Registrar ventas con múltiples productos.
