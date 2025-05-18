@@ -1,6 +1,7 @@
 package com.ecomarket.venta.services;
 
 import com.ecomarket.venta.dto.ActualizarStockDTO;
+import com.ecomarket.venta.dto.PedidoRequestDTO;
 import com.ecomarket.venta.dto.ProductoDTO;
 import com.ecomarket.venta.dto.UsuarioDTO;
 import com.ecomarket.venta.model.DetalleVenta;
@@ -60,8 +61,10 @@ public class VentaService {
             detalle.setPrecioUnitario(producto.getPrecioUnitario());
         }
 
+        // Guardar la venta
         Venta ventaGuardada = ventaRepository.save(venta);
 
+        // Guardar detalles y descontar stock
         for (DetalleVenta detalle : venta.getDetalles()) {
             detalle.setVenta(ventaGuardada);
             detalleVentaRepository.save(detalle);
@@ -71,6 +74,13 @@ public class VentaService {
         }
 
         ventaGuardada.setDetalles(venta.getDetalles());
+
+        // Crear pedido en pedidos-logistica
+        crearPedido(
+            ventaGuardada.getId(),
+            venta.getEmailUsuario(),
+            venta.getDireccionDespacho()
+        );
         return ventaGuardada;
     }
 
@@ -177,6 +187,25 @@ public class VentaService {
             HttpMethod.POST,
             entity,
             String.class
+        );
+    }
+
+    private void crearPedido(Long idVenta, String emailCliente, String direccionDespacho) {
+    PedidoRequestDTO dto = new PedidoRequestDTO();
+    dto.setIdVenta(idVenta);
+    dto.setEmailCliente(emailCliente);
+    dto.setDireccionDespacho(direccionDespacho);
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+
+    HttpEntity<PedidoRequestDTO> entity = new HttpEntity<>(dto, headers);
+
+    restTemplate.exchange(
+        "http://localhost:8085/api/pedidos",
+        HttpMethod.POST,
+        entity,
+        String.class
         );
     }
 }
