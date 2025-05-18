@@ -75,7 +75,7 @@ server.port=8084
 ## Ejemplo de uso en Postman
 
   Importa la colección incluida:  
-  **`EcoMarket-VentaService-Postman.json`**
+  **`EcoMarket - VentaService.postman_collection.json`**
 ### Login (desde usuarios-auth)
 ```http
 POST http://localhost:8081/auth/login
