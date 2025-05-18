@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "0ea23667-7f62-407e-aed2-1f8c2d0a0a5c",
+		"name": "EcoMarket - VentaService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "43955048"
+	},
+	"item": [
+		{
+			"name": "Registrar Venta (valida stock + descuenta)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"emailUsuario\": \"cliente@example.com\",\n  \"metodoPago\": \"Tarjeta\",\n  \"direccionDespacho\": \"Av. Siempre Viva 742\",\n  \"total\": 5980,\n  \"detalles\": [\n    {\n      \"idProducto\": 1,\n      \"nombreProducto\": \"\",\n      \"cantidad\": 2,\n      \"precioUnitario\": 0\n    }\n  ]\n}"
+				},
+				"url": "http://localhost:8084/api/ventas"
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todas las ventas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8084/api/ventas"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener ventas por usuario",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": "http://localhost:8084/api/ventas/cliente@example.com"
+			},
+			"response": []
+		},
+		{
+			"name": "Generar Boleta en PDF",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": "http://localhost:8084/api/ventas/1/boleta"
+			},
+			"response": []
+		},
+		{
+			"name": "Cancelar Venta (DELETE)",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": "http://localhost:8084/api/ventas/1"
+			},
+			"response": []
+		}
+	]
+}
