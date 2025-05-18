@@ -32,6 +32,8 @@ public class Venta {
 
     private String metodoPago;
 
+    private String direccionDespacho;
+
     @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
     private List<DetalleVenta> detalles;
 }
