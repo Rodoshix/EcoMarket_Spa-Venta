@@ -13,6 +13,7 @@ Este microservicio gestiona el registro y control de ventas realizadas en EcoMar
 - Lombok
 - MySQL
 - RestTemplate (para comunicación entre microservicios)
+- Mail (integrado vía notificacion-service)
 - OpenPDF (para generación de boletas)
 
 ---
@@ -48,15 +49,23 @@ server.port=8084
 - Validar token JWT con `usuarios-auth-service`.
 - Validar stock en tiempo real consultando `inventario-service`.
 - Descontar automáticamente el stock al confirmar una venta.
-- Generar boletas PDF.
+- Generar detalles de venta y asociarlos
+- Crear pedidos asociados vía `pedido-service`
+- Enviar confirmación por correo vía `notificacion-service`
+- Obtener listado de ventas por usuario o general
+- Generar boletas o facturas en formato PDF
 - Cancelar ventas registradas.
 
 ---
 
 ## Microservicios integrados
 
-- **usuarios-auth-service** (`localhost:8081`)
-- **inventario-service** (`localhost:8082`)
+| Servicio                 | Función                                                       |
+|--------------------------|---------------------------------------------------------------|
+| `inventario-service`     | Consulta y actualización del stock por producto               |
+| `usuario-auth-service`   | Verificación de usuario a través de token JWT                 |
+| `pedido-service`         | Registro automático de pedidos tras una venta                 |
+| `notificacion-service`   | Envío de correos de confirmación de compra al cliente         |
 
 ---
 
