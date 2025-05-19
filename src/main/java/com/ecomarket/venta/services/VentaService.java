@@ -1,6 +1,7 @@
 package com.ecomarket.venta.services;
 
 import com.ecomarket.venta.dto.ActualizarStockDTO;
+import com.ecomarket.venta.dto.NotificacionDTO;
 import com.ecomarket.venta.dto.PedidoRequestDTO;
 import com.ecomarket.venta.dto.ProductoDTO;
 import com.ecomarket.venta.dto.UsuarioDTO;
@@ -81,6 +82,24 @@ public class VentaService {
             venta.getEmailUsuario(),
             venta.getDireccionDespacho()
         );
+
+        // Notificar por correo al usuario
+        NotificacionDTO notificacion = new NotificacionDTO();
+        notificacion.setDestinatario(venta.getEmailUsuario());
+        notificacion.setAsunto("EcoMarket - Confirmación de Compra");
+        notificacion.setCuerpo("Gracias por tu compra. El total fue de $" + venta.getTotal() + ". Tu pedido está en preparación.");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<NotificacionDTO> request = new HttpEntity<>(notificacion, headers);
+
+        try {
+            restTemplate.postForEntity("http://localhost:8086/api/notificaciones/enviar", request, String.class);
+            System.out.println("Notificación enviada a: " + venta.getEmailUsuario());
+        } catch (Exception e) {
+            System.err.println("Error al enviar notificación: " + e.getMessage());
+        }
         return ventaGuardada;
     }
 
