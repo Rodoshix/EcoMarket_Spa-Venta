@@ -20,6 +20,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDateTime;
@@ -38,6 +39,9 @@ public class VentaService {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Value("${ecomarket.notificaciones.url}")
+    private String urlNotificacion;
 
     // Registrar una venta con validación de usuario y stock
     public Venta registrarVenta(Venta venta, String jwtToken) {
@@ -95,7 +99,7 @@ public class VentaService {
         HttpEntity<NotificacionDTO> request = new HttpEntity<>(notificacion, headers);
 
         try {
-            restTemplate.postForEntity("http://localhost:8086/api/notificaciones/enviar", request, String.class);
+            restTemplate.postForEntity(urlNotificacion, request, String.class);
             System.out.println("Notificación enviada a: " + venta.getEmailUsuario());
         } catch (Exception e) {
             System.err.println("Error al enviar notificación: " + e.getMessage());
