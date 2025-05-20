@@ -1,6 +1,6 @@
 # EcoMarket SPA - Microservicio Venta-Service
 
-Este microservicio gestiona el registro y control de ventas realizadas en EcoMarket SPA. Incluye funcionalidades de validación de stock, generación de boletas en PDF y cancelación de ventas.
+Este microservicio gestiona el registro y control de ventas realizadas en EcoMarket SPA del proyecto semestral FullStack_1. Incluye funcionalidades de validación de stock, generación de boletas en PDF y cancelación de ventas.
 
 ---
 
