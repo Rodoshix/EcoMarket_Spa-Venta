@@ -134,7 +134,7 @@ public class VentaService {
     }
 
     // Validación del token con usuarios-auth
-    private void verificarUsuario(String emailUsuario, String jwtToken) {
+    public void verificarUsuario(String emailUsuario, String jwtToken) {
         String url = "http://localhost:8081/api/usuarios/buscar?email=" + emailUsuario;
 
         HttpHeaders headers = new HttpHeaders();
@@ -195,7 +195,7 @@ public class VentaService {
         return baos.toByteArray();
     }
 
-    private void actualizarStock(Long idProducto, int cantidadVendida) {
+    public void actualizarStock(Long idProducto, int cantidadVendida) {
         ActualizarStockDTO dto = new ActualizarStockDTO();
         dto.setIdProducto(idProducto);
         dto.setCantidadVendida(cantidadVendida);
@@ -213,7 +213,7 @@ public class VentaService {
         );
     }
 
-    private void crearPedido(Long idVenta, String emailCliente, String direccionDespacho) {
+    public void crearPedido(Long idVenta, String emailCliente, String direccionDespacho) {
     PedidoRequestDTO dto = new PedidoRequestDTO();
     dto.setIdVenta(idVenta);
     dto.setEmailCliente(emailCliente);
