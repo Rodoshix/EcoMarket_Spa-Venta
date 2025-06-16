@@ -45,8 +45,8 @@ public class VentaController {
     }
 
     // Obtener todas las ventas
-    @Operation(summary = "Listar todas las ventas", description = "Obtiene el listado completo de ventas registradas.")
-    @ApiResponse(responseCode = "200", description = "Listado obtenido exitosamente")
+    @Operation(summary = "Listar todas las ventas con enlaces HATEOAS")
+    @ApiResponse(responseCode = "200", description = "Listado con enlaces generado correctamente")
     @GetMapping
     public ResponseEntity<List<Venta>> listarVentas() {
         return ResponseEntity.ok(ventaService.listarVentas());

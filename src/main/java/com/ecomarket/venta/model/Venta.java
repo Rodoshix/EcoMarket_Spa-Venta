@@ -15,7 +15,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.hateoas.server.core.Relation;
 
+@Relation(collectionRelation = "ventas")
 @Schema(description = "Entidad que representa una venta con sus productos asociados")
 @Entity
 @Data
