@@ -57,7 +57,7 @@ public class VentaPerformanceTest {
         stopWatch.stop();
         long tiempo = stopWatch.getTotalTimeMillis();
 
-        System.out.println("⏱ Tiempo de respuesta /api/ventas: " + tiempo + " ms");
+        System.out.println("Tiempo de respuesta /api/ventas: " + tiempo + " ms");
 
         assertThat(tiempo).isLessThan(500); // Umbral de rendimiento aceptable
     }

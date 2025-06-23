@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.ecomarket.venta.performance.VentaPerformanceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.713 s -- in com.ecomarket.venta.performance.VentaPerformanceTest
